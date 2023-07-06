@@ -18,27 +18,34 @@
 
 
 // ===================================== Function Definitions =========================
-int main(void) {
-    /* stringIntDict_t Testing */
+/**
+ * @Brief Run test 1 of the testing suite (Creation of small string to int dict, simple gets and free)
+ *
+ * @return 0 if pass 1 if failed
+ */
+int test1(void) {	
     // Test creating a dictionary
     char* keys[] = {"a", "b", "c"};
     int values[] = {1, 2, 3};
 
     stringIntDict_t* stringIntDict = stringIntDict_create(keys, values, 3);
 
-    // Print the size of the dictionary
-    printf("Size of stringIntDict: %d\n", stringIntDict->size);
-
-    // Print the values of the dictionary
+	// Check the values	
     for (int i = 0; i < stringIntDict->size; i++) {
-        printf("Key: %s, Value: %d\n", stringIntDict->keys[i], stringIntDict->values[i]);
-    }
+    	if (keys[i] != stringIntDict.keys[i] || values[i] != stringIntDict.values[i]) {
+			return 1;
+		}
+	}
 
     // Test getting a value from the dictionary
-    printf("Value of key 'b': %d\n", stringIntDict_get(stringIntDict, "b"));
+    
 
     // Free the dictionary
     stringIntDict_free(stringIntDict);
 
+
+
+
+int main(void) {
     printf("!! String to Int Dictionary Tests Passed\n");
 }
