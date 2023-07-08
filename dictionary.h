@@ -29,5 +29,5 @@ stringIntDict_t* stringIntDict_create(char** keys, int* values, int size);
 void stringIntDict_free(stringIntDict_t* dict);
 int stringIntDict_get(stringIntDict_t* dict, char* key);
 
-
 #endif // DICTIONARY_H
+

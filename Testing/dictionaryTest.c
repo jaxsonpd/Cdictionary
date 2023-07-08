@@ -7,7 +7,7 @@
 
 
 // ===================================== Includes =====================================
-#include "dictionary.h"
+#include "..\dictionary.h"
 
 #include <stdio.h>
 
@@ -32,7 +32,7 @@ int test1(void) {
 
 	// Check the values	
     for (int i = 0; i < stringIntDict->size; i++) {
-    	if (keys[i] != stringIntDict.keys[i] || values[i] != stringIntDict.values[i]) {
+		if (keys[i] != stringIntDict->keys[i] || values[i] != stringIntDict->values[i]) {
 			return 1;
 		}
 	}
@@ -43,9 +43,12 @@ int test1(void) {
     // Free the dictionary
     stringIntDict_free(stringIntDict);
 
+	return 0;
+}
 
 
 
-int main(void) {
+int main() {
     printf("!! String to Int Dictionary Tests Passed\n");
 }
+
