@@ -11,7 +11,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-
+#include <stdio.h>
 
 // ===================================== Constants ====================================
 
@@ -76,7 +76,7 @@ int stringIntDict_get(stringIntDict_t* dict, char* key) {
             return dict->values[i];
         }
     }
-
+	
     // If the key is not found return -1
     return -1;
 }
@@ -87,9 +87,7 @@ int stringIntDict_get(stringIntDict_t* dict, char* key) {
  */
 void stringIntDict_free(stringIntDict_t* dict) {
     // Free the keys
-    for (int i = 0; i < dict->size; i++) {
-        free(dict->keys[i]);
-    }
+	free(dict->keys);
 
     // Free the values
     free(dict->values);
@@ -98,3 +96,30 @@ void stringIntDict_free(stringIntDict_t* dict) {
     free(dict);
 }
 
+
+int main(void) {
+    // Test creating a dictionary
+    char* keys[] = {"a", "b", "c"};
+    int values[] = {1, 2, 3};
+
+    stringIntDict_t* stringIntDict = stringIntDict_create(keys, values, 3);
+
+	// Check the values	
+    for (int i = 0; i < stringIntDict->size; i++) {
+		if (keys[i] != stringIntDict->keys[i] || values[i] != stringIntDict->values[i]) {
+			printf("Struct Creation Test Failed");
+		}
+	}
+
+    // Test getting a value from the dictionary
+	if (stringIntDict_get(stringIntDict, "a") != values[0]
+			|| 	stringIntDict_get(stringIntDict, "b") != values[1]
+			) {
+		printf("Value return function test failed");
+	}
+
+    // Free the dictionary
+    stringIntDict_free(stringIntDict);
+
+	printf("All tests past!");
+}
